@@ -248,8 +248,7 @@ class Route
         // Make a proper a Regular Expression query
         // If matches return an integer count
         // Else `false` that will be casted as `0`
-        $count =@ (int) preg_match_all(
-            '~(?<![$]r )\{(.+?)\}|:(\w+)~', $route, $matches);
+        $count =@ (int) preg_match_all('~\{(.+?)\}|:(\w+)~', $route, $matches);
 
         // So, should we go on?
         if ($count) {
