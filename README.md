@@ -263,16 +263,15 @@ $rest->listen();
 # /rest/endpoints/user.php
 class UserEndpoint extends Rest {
     ...
-    public function get() {
-        $id   = (int) $this->route->getParam($id);
-        $user = $this->model->user->find($id);
+    public function patch() {
+        $user = $this->model->user->find((int) $this->route->getParam($id));
         if ($user) {
             $body = $this->json->encode($user);
-            $this->response->setStatus(200);
+            $this->response->setStatus(204);
             $this->response->setBody($body);
             return $this->response->send();
         }
-        return $this->response->notFound();
+        return $this->response->sendError(404);
     }
 }
 ```
