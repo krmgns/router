@@ -42,7 +42,7 @@ Let's what operators produce and if you need more, simply use pure RegExp statem
 ```php
 $route = new \Router\Route();
 # This method is useful if you need to remove base URI
-# E.g: #dev.local/router/user
+# E.g: http://dev.local/router/user
 # $route->removeUriBase('/router');
 ```
 
@@ -58,7 +58,7 @@ $route->add('/user', [
 
 ...
 
-# Finally calling matcher method
+# Finally call matcher method after all route rules added
 $route->run();
 
 # If don't want to run router for "/" uri
@@ -172,7 +172,7 @@ $route->add('/user/$username/{followers|followees}', [
 ]);
 ```
 
-** Manual RegExps (pure for geeks...)
+** Manual RegExps (pure for geeks)
 ```php
 $route->add('/user/(\d+)', [
     '_name_' => 'user',
@@ -200,7 +200,6 @@ $route->add('/user/(?<uid>\d+)/(?<tab>followers|followees)', [
 ```
 
 ** Using with MVC-like systems (as a sample)
-
 ```php
 # /mvc/bootstrap.php
 $route->add('/user/edit/{%d}', [
@@ -209,7 +208,7 @@ $route->add('/user/edit/{%d}', [
     'params' => ['id']
 ]);
 
-$app = new App();
+$app = new Application();
 $app->setRoute($route);
 ...
 $app->serve();
@@ -225,10 +224,10 @@ class Controller {
             $routeFile = $this->route->getFile();
             if ($routeFile == null) {
                 $this->logger->write('route error, uri: `%s`', $route->uri);
+                $body = $this->view->render('/error/404.phtml');
                 $this->response->setStatus(404, 'Not Found');
-                $this->response->setBody($this->view->render('/error/404.phtml'));
-                $this->response->send();
-                return;
+                $this->response->setBody($body);
+                return $this->response->send();
             }
         }
         ...
@@ -243,6 +242,37 @@ class UserController extends Controller {
         if ($id) {
             $this->model->user->update(...);
         }
+    }
+}
+```
+
+** Using with REST-like systems (as a sample)
+```php
+# /rest/bootstrap.php
+$route->add('/user/edit/{%d}', [
+    '_name_' => 'user',
+    '_file_' => '/rest/endpoints/user.php',
+    'params' => ['id']
+]);
+
+$rest = new Rest();
+$rest->setRoute($route);
+...
+$rest->listen();
+
+# /rest/endpoints/user.php
+class UserEndpoint extends Rest {
+    ...
+    public function get() {
+        $id   = (int) $this->route->getParam($id);
+        $user = $this->model->user->find($id);
+        if ($user) {
+            $body = $this->json->encode($user);
+            $this->response->setStatus(200);
+            $this->response->setBody($body);
+            return $this->response->send();
+        }
+        return $this->response->notFound();
     }
 }
 ```
