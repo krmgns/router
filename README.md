@@ -55,6 +55,23 @@ $route->add('/user', [
     '_name_' => 'user',
     '_file_' => '/routes/user.php',
 ]);
+
+...
+
+# Finally calling matcher method
+$route->run();
+
+# If don't want to run router for "/" uri
+if (!$route->isRoot()) {
+    $route->run();
+}
+
+# Get route file
+$file = $route->getFile();
+# Check file (or you can define your file checker / shomething else)
+if (is_file($file)) {
+    require($file);
+}
 ```
 
 ** With params
@@ -182,19 +199,46 @@ $route->add('/user/(?<uid>\d+)/(?<tab>followers|followees)', [
 ]);
 ```
 
-** Using with MVC (as an idea)
+** Using with MVC-like systems (as a sample)
 
 ```php
+# /mvc/bootstrap.php
 $route->add('/user/edit/{%d}', [
     '_name_' => 'user',
     '_file_' => '/mvc/app/contollers/user-controller.php',
     'params' => ['id']
 ]);
 
-# /mvc/app/contollers/user-controller.php
-class UserController {
+$app = new App();
+$app->setRoute($route);
+...
+$app->serve();
+
+# /mvc/sys/controller.php
+class Controller {
+    protected $route;
     ...
-    public function edit() {
+    public function __construct(\Router\Route $route) {
+        $this->route = $route;
+        ...
+        if (!$this->route->isRoot()) {
+            $routeFile = $this->route->getFile();
+            if ($routeFile == null) {
+                $this->logger->write('route error, uri: `%s`', $route->uri);
+                $this->response->setStatus(404, 'Not Found');
+                $this->response->setBody($this->view->render('/error/404.phtml'));
+                $this->response->send();
+                return;
+            }
+        }
+        ...
+    }
+}
+
+# /mvc/app/contollers/user-controller.php
+class UserController extends Controller {
+    ...
+    public function doEdit() {
         $id = (int) $this->route->getParam('id');
         if ($id) {
             $this->model->user->update(...);
