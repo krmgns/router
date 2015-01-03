@@ -240,7 +240,7 @@ class UserController extends Controller {
     public function doEdit() {
         $id = (int) $this->route->getParam('id');
         if ($id) {
-            $this->model->user->update(...);
+            $this->model->user->update($id, ...);
         }
     }
 }
@@ -264,7 +264,8 @@ $rest->listen();
 class UserEndpoint extends Rest {
     ...
     public function patch() {
-        $user = $this->model->user->find((int) $this->route->getParam($id));
+        $id = (int) $this->route->getParam($id);
+        $user = $this->model->user->findById($id);
         if ($user) {
             $body = $this->json->encode($user);
             $this->response->setStatus(204);
