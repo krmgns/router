@@ -29,11 +29,6 @@ require(__dir__.'/Router/Route.php');
 $route = new \Router\Route();
 $route->removeUriBase('/router');
 
-// degistirelim bu regexp manyakligini
-// daha basit ve alisilmis bisi olsun
-// /:login|logout => (login|logout) gibi
-// '$re~^/user/([0-9]+)~i'; //isterse raw regex pattern de girebilsin ayri bir fn ile (addRE) veya $re ile eklesin (başka {d} falan ekleyemez!!!)
-
 // $route->add('/user', [
 //     '_name_' => 'user',
 //     '_file_' => '/routes/user.php',
