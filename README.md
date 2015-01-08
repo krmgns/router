@@ -70,7 +70,7 @@ if (!$route->isRoot()) {
 $file = $route->getFile();
 # Check file (or you can define your file checker / shomething else)
 if (is_file($file)) {
-    require($file);
+    include($file);
 }
 ```
 
