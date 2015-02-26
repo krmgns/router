@@ -28,32 +28,32 @@ namespace Router;
 /**
  * @package Router
  * @object  Route
- * @version 1.0
+ * @version 1.1
  * @author  Kerem Gunes <qeremy@gmail>
  */
 class Route
 {
     /**
      * Request URI/URI Base
-     * @var str
+     * @var string
      */
     protected $uri, $uriBase;
 
     /**
      * Route name
-     * @var str
+     * @var string
      */
     protected $name;
 
     /**
      * Route file
-     * @var str
+     * @var string
      */
     protected $file;
 
     /**
      * Route pattern
-     * @var str
+     * @var string
      */
     protected $pattern;
 
@@ -94,16 +94,16 @@ class Route
     /**
      * Get hidden properties
      *
-     * @param  str      $name
-     * @return mix|null
+     * @param  string     $name
+     * @return mixed|null
      * @throws RouteException If property does not exists
      */
     public function __get($name) {
         if (property_exists($this, $name)) {
             return $this->$name;
         }
-        throw new RouteException(
-            'Property does not exists! $name: %s', $name);
+
+        throw new RouteException('Property does not exists! $name: %s', $name);
     }
 
     /**
@@ -111,9 +111,9 @@ class Route
      *
      * It is designed as only property getter
      *
-     * @param  str      $name
-     * @param  array    $args
-     * @return mix|null
+     * @param  string     $name
+     * @param  array      $args
+     * @return mixed|null
      * @throws RouteException If method does not exists
      */
     public function __call($name, $args = []) {
@@ -125,15 +125,15 @@ class Route
                 return $this->__get($name);
             }
         }
-        throw new RouteException(
-            'Method does not exists! $name: %s', $name);
+
+        throw new RouteException('Method does not exists! $name: %s', $name);
     }
 
     /**
      * Run object for finding proper route
      *
-     * Loop over added routes, use route pattern
-     * and match with Request URI set self.route
+     * Loop over added routes, use route pattern and
+     * match with Request URI set self.route
      */
     public function run() {
         foreach ($this->routes as $name => $routes) {
@@ -171,8 +171,8 @@ class Route
     /**
      * Add a new route rule
      *
-     * @param  str   $route Request path/endpoint
-     * @param  array $args  Handler of arguments (_name_ and _file_ required)
+     * @param string $route Request path/endpoint
+     * @param array  $args  Handler of arguments ("_name_" and "_file_" required)
      */
     public function add($route, array $args) {
         // Check for mandatories
@@ -207,11 +207,10 @@ class Route
     }
 
     /**
-     * Add a new shortcut pattern that will be used
-     * as route pattern
+     * Add a new shortcut pattern that will be used as route pattern
      *
-     * @param str $name
-     * @param str $value
+     * @param string $name
+     * @param string $value
      */
     public function addShortcutPattern($name, $value) {
         $this->shortcutPatterns[$name] = $value;
@@ -225,7 +224,7 @@ class Route
      * with URI's like http://dev.local/router/user
      * E.g: Remove `/route` $route->removeUriBase('/route')
      *
-     * @param str $base URI base that will be removed
+     * @param string $base URI base that will be removed
      */
     public function removeUriBase($base) {
         $this->uri = preg_replace(
@@ -236,10 +235,10 @@ class Route
     /**
      * Prepare and set route pattern
      *
-     * @param str   $route  Target route
-     * @param array $params
-     * @param str   $name   Route name
-     * @param int   $index  Route index
+     * @param string  $route  Target route
+     * @param array   $params
+     * @param string  $name   Route name
+     * @param integer $index  Route index
      */
     protected function _setPattern($route, array $params, $name, $index) {
         // Set pattern route as default
@@ -362,13 +361,13 @@ class Route
      *
      * Resets file name if matches with params, e.g:
      *  route  -> /user/{followers|followees}
-     *  args   -> _file_ = /routes/user-$tab.php
-     *  args   -> params = [tab]
+     *         -> _file_ = /routes/user-$tab.php
+     *         -> params = [tab]
      *  result -> _file_ /routes/user-followers.php
      *
-     * @param  str   $file    Route file
-     * @param  array $params  Route params
-     * @return str   $file    Route file
+     * @param  string $file   Route file
+     * @param  array  $params Route params
+     * @return string $file   Route file
      * @throws RouteException If named param index not defined
      */
     protected function _resetFileName($file, array $params) {
@@ -393,7 +392,7 @@ class Route
     /**
      * Set self.uri
      *
-     * @return str self.uri
+     * @return string self.uri
      */
     protected function _setUri() {
         // Set only once
@@ -412,9 +411,9 @@ class Route
     /**
      * Get param
      *
-     * @param  str      $key
-     * @param  mix|null $defval
-     * @return mix|null
+     * @param  string      $key
+     * @param  mixed|null  $defval
+     * @return mixed|null
      */
     public function getParam($key, $defval = null) {
         return isset($this->params[$key])
@@ -425,8 +424,8 @@ class Route
     /**
      * Get route pattern or pattern rs/re
      *
-     * @param  str|null $key Only rs/re valid
-     * @return mix|null
+     * @param  string|null $key Only rs/re valid
+     * @return mixed|null
      */
     public function getPattern($key = null) {
         if ($key != null) {
