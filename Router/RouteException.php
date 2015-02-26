@@ -29,7 +29,7 @@ namespace Router;
  * @package Router
  * @object  RouteException
  * @extends \Exception
- * @version 1.0
+ * @version 1.1
  * @author  Kerem Gunes <qeremy@gmail>
  */
 class RouteException
@@ -41,11 +41,12 @@ class RouteException
     public function __construct() {
         // Set message
         $args = func_get_args();
-        $mesg = count($args) == 1
-            ? "\n ". $args[0] ."\n"
-            : "\n ". vsprintf(array_shift($args), $args) ."\n";
+        $mesg = array_shift($args);
+        if (!empty($args)) {
+            $mesg = vsprintf($mesg, $args);
+        }
 
         // Call parent init
-        parent::__construct($mesg);
+        parent::__construct("\n$mesg\n");
     }
 }
