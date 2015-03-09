@@ -82,10 +82,10 @@ class Route
     protected $shortcutPatterns = [];
 
     /**
-     * Create new Route object / set self.uri.
+     * Create a new Route object.
      */
     public function __construct() {
-        // Set self.uri
+        // set self.uri
         $this->_setUri();
     }
 
@@ -130,8 +130,8 @@ class Route
     /**
      * Run object for finding proper route.
      *
-     * Loop over added routes, use route pattern and
-     * match with Request URI set self.route.
+     * Loop over added routes, use route pattern and match
+     * with Request URI set self.route.
      *
      * @return void
      */

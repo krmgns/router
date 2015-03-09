@@ -36,17 +36,17 @@ class RouteException
     extends \Exception
 {
     /**
-     * Create a new Error object
+     * Create a new RouteException object.
      */
     public function __construct() {
-        // Set message
+        // set message
         $args = func_get_args();
         $mesg = array_shift($args);
         if (!empty($args)) {
             $mesg = vsprintf($mesg, $args);
         }
 
-        // Call parent init
+        // call parent init
         parent::__construct("\n$mesg\n");
     }
 }
