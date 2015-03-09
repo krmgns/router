@@ -232,8 +232,7 @@ class Route
      * @return void
      */
     public function removeUriBase($base) {
-        $this->uri = preg_replace(
-            '~^'. preg_quote($base) .'~', '', $this->uri);
+        $this->uri = preg_replace('~^'. preg_quote($base) .'~', '', $this->uri);
         $this->uriBase = $base;
     }
 
