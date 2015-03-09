@@ -239,10 +239,11 @@ class Route
     /**
      * Prepare and set route pattern
      *
-     * @param string  $route  Target route.
-     * @param array   $params
-     * @param string  $name   Route name.
-     * @param integer $index  Route index.
+     * @param  string  $route  Target route.
+     * @param  array   $params
+     * @param  string  $name   Route name.
+     * @param  integer $index  Route index.
+     * @return void
      */
     protected function _setPattern($route, array $params, $name, $index) {
         // set pattern route as default
