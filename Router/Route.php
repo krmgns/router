@@ -228,7 +228,7 @@ class Route
      *
      * e.g: Remove `/route` $route->removeUriBase('/route')
      *
-     * @param  string $base URI base that will be removed
+     * @param  string $base URI base that will be removed.
      * @return void
      */
     public function removeUriBase($base) {
@@ -240,10 +240,10 @@ class Route
     /**
      * Prepare and set route pattern
      *
-     * @param string  $route  Target route
+     * @param string  $route  Target route.
      * @param array   $params
-     * @param string  $name   Route name
-     * @param integer $index  Route index
+     * @param string  $name   Route name.
+     * @param integer $index  Route index.
      */
     protected function _setPattern($route, array $params, $name, $index) {
         // set pattern route as default
