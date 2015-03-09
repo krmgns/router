@@ -376,7 +376,7 @@ class Route
         // make a proper a regular expression query
         $count =@ (int) preg_match_all('~\$(\w+)~', $file, $matches);
         if ($count) {
-            foreach ($matches[1] as $i => $value) {
+            foreach ((array) $matches[1] as $i => $value) {
                 // get filename
                 $replace = $this->getParam($value);
                 if (empty($replace)) {
