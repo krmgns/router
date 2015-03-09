@@ -226,7 +226,7 @@ class Route
      * of route URI at the beginning when working with
      * URI's like http://dev.local/router/user.
      *
-     * e.g: Remove `/route` $route->removeUriBase('/route')
+     * e.g: remove `/route` -> $route->removeUriBase('/route')
      *
      * @param  string $base URI base that will be removed.
      * @return void
@@ -237,7 +237,7 @@ class Route
     }
 
     /**
-     * Prepare and set route pattern
+     * Prepare and set route pattern.
      *
      * @param  string  $route  Target route.
      * @param  array   $params
