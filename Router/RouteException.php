@@ -27,7 +27,7 @@ namespace Router;
 
 /**
  * @package Router
- * @object  RouteException
+ * @object  Router\RouteException
  * @extends \Exception
  * @version 1.1
  * @author  Kerem Gunes <qeremy@gmail>
