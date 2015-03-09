@@ -172,7 +172,7 @@ class Route
      * Add a new route rule.
      *
      * @param  string $route Request path/endpoint.
-     * @param  array  $args  Handler of arguments ("_name_" and "_file_" required).
+     * @param  array  $args  Handler of arguments, _name_ / _file_ required.
      * @throws Router\RouteException
      * @return void
      */
