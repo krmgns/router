@@ -250,8 +250,6 @@ class Route
         $pattern = $route;
 
         // make a proper a regular expression query
-        // if matches return an integer count
-        // else `false` that will be casted as `0`
         $count =@ (int) preg_match_all('~\{(.+?)\}|:(\w+)~', $route, $matches);
 
         // so, should we go on?
