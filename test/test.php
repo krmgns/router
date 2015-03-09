@@ -23,16 +23,16 @@ function prr() {
 
 /******************************************/
 
-require(__dir__.'/Router/RouteException.php');
-require(__dir__.'/Router/Route.php');
+require(__dir__.'/../Router/RouteException.php');
+require(__dir__.'/../Router/Route.php');
 
 $route = new \Router\Route();
-$route->removeUriBase('/router');
+$route->removeUriBase('/router/test');
 
-// $route->add('/user', [
-//     '_name_' => 'user',
-//     '_file_' => '/routes/user.php',
-// ]);
+$route->add('/user', [
+    '_name_' => 'user',
+    '_file_' => '/routes/user.php',
+]);
 // $route->add('/user/{%d}', [
 //     '_name_' => 'user',
 //     '_file_' => '/routes/user.php',
@@ -78,8 +78,8 @@ $route->removeUriBase('/router');
 // ]);
 
 // Shortcut patterns
-$route->addShortcutPattern('digits', '(\d+)');
-$route->addShortcutPattern('username', '(?<username>[a-z]{1}[a-z0-9-]{2,10})');
+// $route->addShortcutPattern('digits', '(\d+)');
+// $route->addShortcutPattern('username', '(?<username>[a-z]{1}[a-z0-9-]{2,10})');
 
 // matches:
 // $route->add('/user/$digits/message/$digits', [
