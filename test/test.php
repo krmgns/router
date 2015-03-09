@@ -33,11 +33,11 @@ $route->add('/user', [
     '_name_' => 'user',
     '_file_' => '/routes/user.php',
 ]);
-// $route->add('/user/{%d}', [
-//     '_name_' => 'user',
-//     '_file_' => '/routes/user.php',
-//     'params' => ['uid']
-// ]);
+$route->add('/user/{%d}', [
+    '_name_' => 'user',
+    '_file_' => '/routes/user.php',
+    'params' => ['uid']
+]);
 // $route->add('/user/{%d}/{followers|followees}', [
 //     '_name_' => 'user',
 //     '_file_' => '/routes/user.php',
@@ -126,4 +126,5 @@ $route->run();
 // pre($route->getParams());
 
 pre('....');
+pre($route->getPatterns());
 pre($route);
