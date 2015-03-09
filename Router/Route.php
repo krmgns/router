@@ -292,11 +292,10 @@ class Route
                     // type: range ({%az} -> ([a-z]+))
                     elseif ($value[0] == '%' && $length > 2) {
                         // extract words
-                        list($start, $stop, $operator)
-                            =@ (array) [$value[1], $value[2], $value[3]];
+                        list($start, $stop, $operator) =@ (array) [$value[1], $value[2], $value[3]];
                         // set repeat operator
-                        $operator = ($operator == '-')
-                            ? '' : ($operator == '*') ? '*' : '+';
+                        $operator = ($operator == '-') ? '' : (($operator == '*') ? '*' : '+');
+
                         $keys[] = sprintf('~{%s}~', preg_quote($value));
                         $vals[] = sprintf('(%s[%s-%s]%s)', $named, $start, $stop, $operator);
                     }
