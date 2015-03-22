@@ -28,7 +28,7 @@ namespace Router;
 /**
  * @package Router
  * @object  Router\Route
- * @version 1.1
+ * @version 1.2
  * @author  Kerem Gunes <qeremy@gmail>
  */
 class Route
@@ -188,8 +188,7 @@ class Route
         // extract variables
         $name   =& $args['_name_'];
         $file   =& $args['_file_'];
-        $params =@ (array) $args['params'];
-        $extras =@ (array) $args['extras'];
+        $params = isset($args['params']) ? (array) $args['params'] : [];
 
         // init route if not exists
         if (!isset($this->routes[$name])) {
