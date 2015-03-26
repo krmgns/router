@@ -28,7 +28,7 @@ namespace Router;
 /**
  * @package Router
  * @object  Router\Route
- * @version 1.2
+ * @version 1.3
  * @author  Kerem Gunes <qeremy@gmail>
  */
 class Route
@@ -62,6 +62,13 @@ class Route
      * @var array
      */
     protected $params = [];
+
+    /**
+     * Extra options.
+     * @var array
+     */
+    protected $extras = [];
+
 
     /**
      * Route route.
@@ -144,8 +151,9 @@ class Route
                     // create/set params
                     $params = $this->_paramatize($matches, $route['params']);
 
-                    // set params property
+                    // set params/extras properties
                     $this->params            = $params;
+                    $this->extras            = $route['extras'];
 
                     // reset route variables
                     $route['_name_']         = $name;
@@ -189,6 +197,7 @@ class Route
         $name   =& $args['_name_'];
         $file   =& $args['_file_'];
         $params = isset($args['params']) ? (array) $args['params'] : [];
+        $extras = isset($args['extras']) ? $args['extras'] : [];
 
         // init route if not exists
         if (!isset($this->routes[$name])) {
@@ -203,6 +212,7 @@ class Route
             '_name_'  => $name,
             '_file_'  => $file,
             'params'  => $params,
+            'extras'  => $extras,
             'pattern' => $this->_setPattern($route, $params, $name, $index)
         ];
     }
@@ -419,6 +429,19 @@ class Route
     public function getParam($key, $defval = null) {
         return isset($this->params[$key])
             ? $this->params[$key]
+            : $defval;
+    }
+
+    /**
+     * Get extra.
+     *
+     * @param  string     $key
+     * @param  mixed|null $defval
+     * @return mixed|null
+     */
+    public function getExtra($key, $defval = null) {
+        return isset($this->extras[$key])
+            ? $this->extras[$key]
             : $defval;
     }
 
