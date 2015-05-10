@@ -27,6 +27,7 @@ Let's what operators produce and if you need more, simply use pure RegExp statem
 {%x}   = Hexes -> ([a-f0-9]+)
 {%ac}  = a-c   -> ([a-c]+)
 {%az}  = a-z   -> ([a-z]+)
+{%az*} = a-z   -> ([a-z]*)
 {%az-} = a-z   -> ([a-z])
 
 # named (1)
