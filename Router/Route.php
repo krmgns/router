@@ -196,8 +196,8 @@ class Route
         // extract variables
         $name   =& $args['_name_'];
         $file   =& $args['_file_'];
-        $params = isset($args['params']) ? (array) $args['params'] : [];
-        $extras = isset($args['extras']) ? $args['extras'] : [];
+        $params = !isset($args['params']) ? [] : (array) $args['params'];
+        $extras = !isset($args['extras']) ? [] : $args['extras'];
 
         // init route if not exists
         if (!isset($this->routes[$name])) {
