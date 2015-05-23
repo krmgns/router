@@ -1,0 +1,17 @@
+{
+    "name": "qeremy/router",
+    "type": "library",
+    "version": "v1.x",
+    "homepage": "http://github.com/qeremy/router",
+    "description": "Routing crazy with PHP..",
+    "keywords": ["route", "router", "routing"],
+    "license": "The MIT License (MIT)",
+    "authors": [{
+        "name": "Kerem Gunes",
+        "email": "qeremy@gmail.com",
+        "homepage": "http://qeremy.com"
+    }],
+    "require": {
+        "php": ">=5.4.0"
+    }
+}
