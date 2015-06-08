@@ -199,3 +199,32 @@ $route->add('/user/(?<uid>\d+)/(?<tab>followers|followees)', [
     '_file_' => '/routes/user.php',
 ]);
 ```
+
+** Extras
+```php
+# Adding extras
+$route->add('/foo/{bar|baz}', [
+    '_name_' => 'foo',
+    '_file_' => '/files/$file',
+    'params' => ['file'],
+    # here say router to not use header,footer files
+    'extras' => ['head' => false, 'foot' => false]
+]);
+
+# Diagram
+# Match route?      -> yes
+# Found route file? -> yes
+
+# Check to including header file or not
+if ($route->getExtra('head') !== false) {
+    include('/files/header.php');
+}
+
+# Include route file
+include($route->getFile());
+
+# Check to including footer file or not
+if ($route->getExtra('foot') !== false) {
+    include('/files/footer.php');
+}
+```
