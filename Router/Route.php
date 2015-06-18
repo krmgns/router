@@ -28,7 +28,7 @@ namespace Router;
 /**
  * @package Router
  * @object  Router\Route
- * @version 1.3
+ * @version 1.4
  * @author  Kerem Gunes <qeremy@gmail>
  */
 class Route
@@ -408,7 +408,7 @@ class Route
     protected function _setUri() {
         // set only once
         if (!isset($this->uri)) {
-            $this->uri = urldecode($_SERVER['REQUEST_URI']);
+            $this->uri = rawurldecode($_SERVER['REQUEST_URI']);
             // remove query string
             if (($qpos = strpos($this->uri, '?')) !== false) {
                 $this->uri = substr($this->uri, 0, $qpos);
