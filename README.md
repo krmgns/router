@@ -77,14 +77,30 @@ if (is_file($file)) {
 
 ** With params
 ```php
-# You can use param(s) anytime if needed
-# $uid = $route->getParam('uid')
+# You can use (retrieve) params anytime if needed
+# $uid = $route->getParam('uid');
 
 # matches: /user/(\d+)
 $route->add('/user/{%d}', [
     '_name_' => 'user',
     '_file_' => '/routes/user.php',
     'params' => ['uid']
+]);
+
+# Also you can filter them at first
+$route->add('/user/{%d}', [
+    '_name_' => 'user',
+    '_file_' => '/routes/user.php',
+    'params' => ['uid']
+    'params_filter' => function($params){
+        foreach ($params as $key => $value) {
+            $params[$key] = (int) $value;
+            # or
+            if ($key == 'uid') {
+                $params[$key] = (int) $value;
+            }
+        }
+    }
 ]);
 
 # matches: /user/(\d+)/(followers|followees)
@@ -112,7 +128,6 @@ $route->add('/{403|404}', [
     '_file_' => '/routes/errors/$code.php',
     'params' => ['code']
 ]);
-
 ```
 
 ** Named params

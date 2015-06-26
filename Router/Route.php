@@ -28,7 +28,7 @@ namespace Router;
 /**
  * @package Router
  * @object  Router\Route
- * @version 1.4
+ * @version 1.5
  * @author  Kerem Gunes <qeremy@gmail>
  */
 class Route
@@ -58,10 +58,11 @@ class Route
     protected $pattern;
 
     /**
-     * Request params.
-     * @var array
+     * Request params and filter function.
+     * @var array, callable
      */
-    protected $params = [];
+    protected $params = [],
+              $paramsFilter = null;
 
     /**
      * Extra options.
@@ -147,9 +148,20 @@ class Route
             foreach ($routes as $i => $route) {
                 // make a proper regular expression query
                 $count =@ (int) preg_match($route['pattern']['re'], $this->uri, $matches);
+                // matched?
                 if ($count) {
                     // create/set params
                     $params = $this->_paramatize($matches, $route['params']);
+                    // filter params if provided
+                    if (isset($route['paramsFilter'])) {
+                        if (!is_callable($route['paramsFilter'])) {
+                            throw new RouteException('Params filter must be callable!');
+                        }
+                        // store
+                        $this->paramsFilter = $route['paramsFilter'];
+                        // filter
+                        $params = call_user_func($this->paramsFilter, $params);
+                    }
 
                     // set params/extras properties
                     $this->params            = $params;
@@ -196,7 +208,12 @@ class Route
         // extract variables
         $name   =& $args['_name_'];
         $file   =& $args['_file_'];
+
+        // params stuff
         $params = !isset($args['params']) ? [] : (array) $args['params'];
+        $paramsFilter = !isset($args['params_filter']) ? null : $args['params_filter'];
+
+        // extras
         $extras = !isset($args['extras']) ? [] : $args['extras'];
 
         // init route if not exists
@@ -209,11 +226,12 @@ class Route
 
         // fill routes
         $this->routes[$name][$index] = [
-            '_name_'  => $name,
-            '_file_'  => $file,
-            'params'  => $params,
-            'extras'  => $extras,
-            'pattern' => $this->_setPattern($route, $params, $name, $index)
+            '_name_'       => $name,
+            '_file_'       => $file,
+            'params'       => $params,
+            'paramsFilter' => $paramsFilter,
+            'extras'       => $extras,
+            'pattern'      => $this->_setPattern($route, $params, $name, $index)
         ];
     }
 
