@@ -78,7 +78,7 @@ if (is_file($file)) {
 ** With params
 ```php
 # You can use (retrieve) params anytime if needed
-# $uid = $route->getParam('uid');
+$uid = $route->getParam('uid');
 
 # matches: /user/(\d+)
 $route->add('/user/{%d}', [
@@ -91,8 +91,8 @@ $route->add('/user/{%d}', [
 $route->add('/user/{%d}', [
     '_name_' => 'user',
     '_file_' => '/routes/user.php',
-    'params' => ['uid']
-    'params_filter' => function($params){
+    'params' => ['uid'],
+    'params_filter' => function ($params) {
         foreach ($params as $key => $value) {
             $params[$key] = (int) $value;
             # or
