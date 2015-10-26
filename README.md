@@ -231,7 +231,7 @@ $route->add('/foo/{bar|baz}', [
 # Found route file? -> yes
 
 # Check to including header file or not
-if ($route->getExtra('head') !== false) {
+if (false !== $route->getExtra('head')) {
     include('/files/header.php');
 }
 
@@ -239,7 +239,7 @@ if ($route->getExtra('head') !== false) {
 include($route->getFile());
 
 # Check to including footer file or not
-if ($route->getExtra('foot') !== false) {
+if (false !== $route->getExtra('foot')) {
     include('/files/footer.php');
 }
 ```
