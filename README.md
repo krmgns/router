@@ -4,7 +4,7 @@ Implements simple and complex routing operations.
 
 **What doesn't?**
 
-Doesn't implements routes as same as somewhere like general MVC architecture (but could be integrated easily).
+Doesn't implements routes as same as somewhere like general MVC architectures but could be integrated easily, at least hoping so.. :)
 
 <hr size="1" />
 
