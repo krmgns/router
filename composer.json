@@ -1,7 +1,7 @@
 {
     "name": "qeremy/router",
     "type": "library",
-    "version": "v1.x",
+    "version": "1.5",
     "homepage": "http://github.com/qeremy/router",
     "description": "Routing crazy with PHP..",
     "keywords": ["route", "router", "routing"],
