@@ -37,7 +37,7 @@ Let's what operators produce and if you need more, simply use pure RegExp statem
 {followers|followees} = (followers|followees)
 # named (2) with params
 {uid} = uid  -> (?<uid>uid) # if params set as [uid]
-{followers|followees} = (?<tab>{followers|followees}) # if params set as [tab]
+{followers|followees} = (?<tab>(followers|followees)) # if params set as [tab]
 ```
 
 ```php
