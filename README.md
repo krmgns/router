@@ -188,7 +188,7 @@ $route->add('/user/$username/{followers|followees}', [
 ]);
 ```
 
-** Manual RegExps (pure for geeks)
+** Manual RegExp's (pure for geeks)
 ```php
 $route->add('/user/(\d+)', [
     '_name_' => 'user',
