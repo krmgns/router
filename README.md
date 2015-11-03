@@ -8,13 +8,13 @@ Doesn't implements routes as same as somewhere like general MVC architectures bu
 
 <hr size="1" />
 
-**Usage**
+Before beginning;
 
 - Set your autoloader properly
 - Use PHP >= 5.4
 - Handle errors with `try/catch` blocks
 
-** Indicators
+##Indicators##
 
 All provided operators will be setted as a parameter. If named, then could be called by its name, otherwise must be called by integer index.
 
@@ -49,7 +49,7 @@ $route = new \Router\Route();
 
 Note: After all `add()` calls you need to call `run()` method.
 
-** Simple
+##Simple##
 ```php
 # matches: /user
 $route->add('/user', [
@@ -75,7 +75,7 @@ if (is_file($file)) {
 }
 ```
 
-** With params
+##With params##
 ```php
 # You can use (retrieve) params anytime if needed
 $uid = $route->getParam('uid');
@@ -130,7 +130,7 @@ $route->add('/{403|404}', [
 ]);
 ```
 
-** Named params
+##Named params##
 ```php
 # matches: /user/(?<uid>[^/]+)
 $route->add('/user/:uid', [
@@ -163,7 +163,7 @@ $route->add('/user/:uname/message/{%d}', [
 ]);
 ```
 
-** Shortcut patterns
+##Shortcut patterns##
 ```php
 $route->addShortcutPattern('digits', '(\d+)');
 $route->addShortcutPattern('username', '(?<username>[a-z]{1}[a-z0-9-]{2,10})');
@@ -188,7 +188,7 @@ $route->add('/user/$username/{followers|followees}', [
 ]);
 ```
 
-** Manual RegExp's (pure for geeks)
+##Manual RegExp's (pure for geeks)##
 ```php
 $route->add('/user/(\d+)', [
     '_name_' => 'user',
@@ -215,7 +215,7 @@ $route->add('/user/(?<uid>\d+)/(?<tab>followers|followees)', [
 ]);
 ```
 
-** Extras
+##Extras##
 ```php
 # Adding extras
 $route->add('/foo/{bar|baz}', [
