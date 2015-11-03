@@ -16,7 +16,7 @@ Doesn't implements routes as same as somewhere like general MVC architectures bu
 
 ** Indicators
 
-All provided operators will be setted as a parameter. If it's named, then could be called by its name, otherwise must be called by index.
+All provided operators will be setted as a parameter. If named, then could be called by its name, otherwise must be called by integer index.
 
 Let's what operators produce and if you need more, simply use pure RegExp statements...
 
