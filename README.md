@@ -34,10 +34,10 @@ Let's what operators produce and if you need more, simply use pure RegExp statem
 :uid = All   -> (?<uid>[^/]+)
 # named (2)
 {uid} = uid  -> (uid)
-{followers|followees} = followers|followees  -> (followers|followees)
+{followers|followees} = (followers|followees)
 # named (2) with params
-{uid} = uid  -> (?<uid>uid) # params: [uid]
-{followers|followees} = followers|followees  -> (?<tab>{followers|followees}) # params: [tab]
+{uid} = uid  -> (?<uid>uid) # if params set as [uid]
+{followers|followees} = (?<tab>{followers|followees}) # if params set as [tab]
 ```
 
 ```php
