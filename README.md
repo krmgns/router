@@ -49,7 +49,7 @@ $route = new \Router\Route();
 
 Note: After all `add()` calls you need to call `run()` method.
 
-###Simple###
+### Simple
 ```php
 # matches: /user
 $route->add('/user', [
@@ -75,7 +75,7 @@ if (is_file($file)) {
 }
 ```
 
-###With Params###
+### With Params
 ```php
 # You can use (retrieve) params anytime if needed
 $uid = $route->getParam('uid');
@@ -130,7 +130,7 @@ $route->add('/{403|404}', [
 ]);
 ```
 
-###Named Params###
+### Named Params
 ```php
 # matches: /user/(?<uid>[^/]+)
 $route->add('/user/:uid', [
