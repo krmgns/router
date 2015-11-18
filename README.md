@@ -163,7 +163,7 @@ $route->add('/user/:uname/message/{%d}', [
 ]);
 ```
 
-###Shortcut Patterns###
+### Shortcut Patterns
 ```php
 $route->addShortcutPattern('digits', '(\d+)');
 $route->addShortcutPattern('username', '(?<username>[a-z]{1}[a-z0-9-]{2,10})');
@@ -188,7 +188,7 @@ $route->add('/user/$username/{followers|followees}', [
 ]);
 ```
 
-###Manual RegExp's (pure for geeks)###
+### Manual RegExp's (pure for geeks)
 ```php
 $route->add('/user/(\d+)', [
     '_name_' => 'user',
@@ -215,7 +215,7 @@ $route->add('/user/(?<uid>\d+)/(?<tab>followers|followees)', [
 ]);
 ```
 
-###Extras###
+### Extras
 ```php
 # Adding extras
 $route->add('/foo/{bar|baz}', [
